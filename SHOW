@@ -1,0 +1,32 @@
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const tgChatsBlockCollapsed = document.querySelector('#tg-mobile-chats');
+        const tgToggleButton = document.querySelector('.telegram-links-mobile');
+        const tgChatsBlockExpanded = document.querySelector('.telegram-links');
+        const tgImgArrow = document.querySelector('.button-toggle__arrow');
+        const tgToggleBtnText = document.querySelector('.button-toggle__text');
+        const tgLinksMobileBtnContainer = document.querySelector('.telegram-links-mobile__button');
+        const tgMessageText = document.querySelector('.message-text');
+
+        function renderTelegramIcons() {
+            if (tgChatsBlockCollapsed.style.display ==="none") return;
+            const hideChildElements = (htmlElement) => {
+                if (!htmlElement) return;
+                for (let i = 0; i < htmlElement.children.length; i++) {
+                    htmlElement.children[i].style.display = "none";
+                }
+            }
+            const renderNumOfRest = (htmlElement, rest) => {
+                if (!htmlElement && typeof rest !== "number") return;
+                if (rest > 0) {
+                    tgMessageText.innerHTML = `+${rest}`;
+                    tgMessageText.style.display = "flex";
+                    return;
+                }
+                tgMessageText.style.display = "none";
+            }
+            const renderIconsInContainer = (htmlElement) => { /** render icons that fit the parent container (tgChatsBlockCollapsed) **/
+                if (!htmlElement) return;
+                const ONE_ELEMENT_WIDTH = 22;
+                const MAX_NUM_OF_ELEMENTS = 19;
+                const CONTAINER_WIDTH = htmlElement.offsetWidth - ONE_ELEMENT_WIDTH;
